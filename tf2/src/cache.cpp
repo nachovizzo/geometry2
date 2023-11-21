@@ -145,18 +145,18 @@ uint8_t TimeCache::findClosest(
     }
   }
 
-  TimePoint latest_time = (*storage_.begin()).stamp_;
+  TimePoint oldest_time = (*storage_.begin()).stamp_;
   TimePoint earliest_time = (*(storage_.rbegin())).stamp_;
 
-  if (target_time == latest_time) {
+  if (target_time == oldest_time) {
     one = &(*storage_.begin());
     return 1;
   } else if (target_time == earliest_time) {
     one = &(*storage_.rbegin());
     return 1;
   } else {   // Catch cases that would require extrapolation
-    if (target_time > latest_time) {
-      cache::createExtrapolationException2(target_time, latest_time, error_str, error_code);
+    if (target_time > oldest_time) {
+      cache::createExtrapolationException2(target_time, oldest_time, error_str, error_code);
       return 0;
     } else {
       if (target_time < earliest_time) {
@@ -247,8 +247,8 @@ CompactFrameID TimeCache::getParent(
 
 bool TimeCache::insertData(const TransformStorage & new_data)
 {
-  const TimePoint latest_time = storage_.front().stamp_;
-  if (!storage_.empty() && latest_time > new_data.stamp_ + max_storage_time_) {
+  const TimePoint oldest_time = storage_.front().stamp_;
+  if (!storage_.empty() && oldest_time > new_data.stamp_ + max_storage_time_) {
     return false;
   }
 
@@ -304,9 +304,9 @@ TimePoint TimeCache::getOldestTimestamp()
 
 void TimeCache::pruneList()
 {
-  TimePoint latest_time = storage_.begin()->stamp_;
+  TimePoint oldest_time = storage_.begin()->stamp_;
 
-  while (!storage_.empty() && storage_.back().stamp_ + max_storage_time_ < latest_time) {
+  while (!storage_.empty() && storage_.back().stamp_ + max_storage_time_ < oldest_time) {
     storage_.pop_back();
   }
 }
