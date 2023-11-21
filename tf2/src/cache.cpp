@@ -145,8 +145,8 @@ uint8_t TimeCache::findClosest(
     }
   }
 
-  TimePoint oldest_time = (*storage_.begin()).stamp_;
-  TimePoint earliest_time = (*(storage_.rbegin())).stamp_;
+  const TimePoint oldest_time = getOldestTimestamp();
+  const TimePoint earliest_time = getLatestTimestamp();
 
   if (target_time == oldest_time) {
     one = &(*storage_.begin());
