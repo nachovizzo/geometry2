@@ -305,7 +305,7 @@ TimePoint TimeCache::getOldestTimestamp()
 
 void TimeCache::pruneList()
 {
-  const TimePoint oldest_time = storage_.begin()->stamp_;
+  const TimePoint oldest_time = storage_.front().stamp_;
 
   while (!storage_.empty() && storage_.back().stamp_ < oldest_time - max_storage_time_) {
     storage_.pop_back();
