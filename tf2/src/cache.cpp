@@ -307,8 +307,9 @@ void TimeCache::pruneList()
 {
   const TimePoint oldest_time = storage_.front().stamp_;
 
-  while (!storage_.empty() && storage_.back().stamp_ < oldest_time - max_storage_time_) {
-    storage_.pop_back();
-  }
+  storage_.remove_if(
+    [&](const auto & transform) {
+      return transform.stamp_ < oldest_time - max_storage_time_;
+    });
 }
 }  // namespace tf2
