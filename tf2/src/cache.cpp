@@ -246,14 +246,11 @@ CompactFrameID TimeCache::getParent(
 
 bool TimeCache::insertData(const TransformStorage & new_data)
 {
-  L_TransformStorage::iterator storage_it = storage_.begin();
-
-  if (storage_it != storage_.end()) {
-    if (storage_it->stamp_ > new_data.stamp_ + max_storage_time_) {
-      return false;
-    }
+  if (!storage_.empty() && storage_.front().stamp_ > new_data.stamp_ + max_storage_time_) {
+    return false;
   }
 
+  L_TransformStorage::iterator storage_it = storage_.begin();
   while (storage_it != storage_.end()) {
     if (storage_it->stamp_ <= new_data.stamp_) {
       break;
