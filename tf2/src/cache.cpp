@@ -247,16 +247,16 @@ CompactFrameID TimeCache::getParent(
 
 bool TimeCache::insertData(const TransformStorage & new_data)
 {
-  const TimePoint oldest_time = storage_.front().stamp_;
+  const TimePoint newest_time = storage_.front().stamp_;
 
   // Avoid inserting data in the past that already exceeds the max_storage_time_
-  if (!storage_.empty() && new_data.stamp_ < oldest_time - max_storage_time_) {
+  if (!storage_.empty() && new_data.stamp_ < newest_time - max_storage_time_) {
     return false;
   }
 
   auto storage_it = std::find_if(
     storage_.begin(), storage_.end(), [&](const auto & transfrom) {
-      return transfrom.stamp_ < new_data.stamp_;
+      return transfrom.stamp_ <= new_data.stamp_;
     });
 
   // Insert elements only if the stamp is already not present
@@ -308,11 +308,11 @@ TimePoint TimeCache::getOldestTimestamp()
 
 void TimeCache::pruneList()
 {
-  const TimePoint oldest_time = storage_.front().stamp_;
+  const TimePoint newest_time = storage_.front().stamp_;
 
   storage_.remove_if(
     [&](const auto & transform) {
-      return transform.stamp_ < oldest_time - max_storage_time_;
+      return transform.stamp_ < newest_time - max_storage_time_;
     });
 
 }
