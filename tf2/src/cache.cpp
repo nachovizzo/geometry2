@@ -256,10 +256,13 @@ bool TimeCache::insertData(const TransformStorage & new_data)
 
   auto storage_it = std::find_if(
     storage_.begin(), storage_.end(), [&](const auto & transfrom) {
-      return transfrom.stamp_ <= new_data.stamp_;
+      return transfrom.stamp_ < new_data.stamp_;
     });
 
-  storage_.insert(storage_it, new_data);
+  // Insert elements only if the stamp is already not present
+  if (storage_it->stamp_ != new_data.stamp_) {
+    storage_.insert(storage_it, new_data);
+  }
 
   pruneList();
   return true;
@@ -311,5 +314,6 @@ void TimeCache::pruneList()
     [&](const auto & transform) {
       return transform.stamp_ < oldest_time - max_storage_time_;
     });
+
 }
 }  // namespace tf2
