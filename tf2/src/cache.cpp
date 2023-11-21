@@ -247,9 +247,11 @@ CompactFrameID TimeCache::getParent(
 
 bool TimeCache::insertData(const TransformStorage & new_data)
 {
-  if (!storage_.empty() && storage_.front().stamp_ > new_data.stamp_ + max_storage_time_) {
+  const TimePoint latest_time = storage_.front().stamp_;
+  if (!storage_.empty() && latest_time > new_data.stamp_ + max_storage_time_) {
     return false;
   }
+
 
   auto storage_it = std::find_if(
     storage_.begin(), storage_.end(), [&](const auto & transfrom) {
