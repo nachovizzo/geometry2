@@ -28,6 +28,7 @@
 
 /** \author Tully Foote */
 
+#include <algorithm>
 #include <cassert>
 #include <sstream>
 #include <string>
@@ -250,13 +251,11 @@ bool TimeCache::insertData(const TransformStorage & new_data)
     return false;
   }
 
-  L_TransformStorage::iterator storage_it = storage_.begin();
-  while (storage_it != storage_.end()) {
-    if (storage_it->stamp_ <= new_data.stamp_) {
-      break;
-    }
-    storage_it++;
-  }
+  auto storage_it = std::find_if(
+    storage_.begin(), storage_.end(), [&](const auto & transfrom) {
+      return transfrom.stamp_ <= new_data.stamp_;
+    });
+
   storage_.insert(storage_it, new_data);
 
   pruneList();
