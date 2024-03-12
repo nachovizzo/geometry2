@@ -2,6 +2,19 @@
 Changelog for package tf2_ros
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.36.0 (2024-02-07)
+-------------------
+* Enable intra-process (`#649 <https://github.com/ros2/geometry2/issues/649>`_) (`#642 <https://github.com/ros2/geometry2/issues/642>`_)
+* Contributors: Patrick Roncagliolo
+
+0.35.1 (2024-01-24)
+-------------------
+
+0.35.0 (2023-12-26)
+-------------------
+* Avoid unecessary time conversions. (`#635 <https://github.com/ros2/geometry2/issues/635>`_)
+* Contributors: AiVerisimilitude
+
 0.34.0 (2023-11-06)
 -------------------
 * Expose TF2 listener CB (`#632 <https://github.com/ros2/geometry2/issues/632>`_)

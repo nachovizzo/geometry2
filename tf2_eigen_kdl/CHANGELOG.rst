@@ -2,6 +2,18 @@
 Changelog for package tf2_eigen_kdl
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.36.0 (2024-02-07)
+-------------------
+
+0.35.1 (2024-01-24)
+-------------------
+
+0.35.0 (2023-12-26)
+-------------------
+* Remove unnecessary use of ament_target_dependencies. (`#637 <https://github.com/ros2/geometry2/issues/637>`_)
+  We can just use target_link_libraries instead.
+* Contributors: Chris Lalancette
+
 0.34.0 (2023-11-06)
 -------------------
 

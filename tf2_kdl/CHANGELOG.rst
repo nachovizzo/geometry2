@@ -2,6 +2,17 @@
 Changelog for package tf2_kdl
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.36.0 (2024-02-07)
+-------------------
+* Removed obsolete headers (`#645 <https://github.com/ros2/geometry2/issues/645>`_)
+* Contributors: Alejandro Hernández Cordero
+
+0.35.1 (2024-01-24)
+-------------------
+
+0.35.0 (2023-12-26)
+-------------------
+
 0.34.0 (2023-11-06)
 -------------------
 

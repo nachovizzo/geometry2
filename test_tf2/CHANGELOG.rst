@@ -2,6 +2,17 @@
 Changelog for package test_tf2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.36.0 (2024-02-07)
+-------------------
+* normalize quaternions on tf2_eigen (`#644 <https://github.com/ros2/geometry2/issues/644>`_)
+* Contributors: Paul Gesel
+
+0.35.1 (2024-01-24)
+-------------------
+
+0.35.0 (2023-12-26)
+-------------------
+
 0.34.0 (2023-11-06)
 -------------------
 
